@@ -51,8 +51,12 @@ function AddItem() {
       }}
     >
       <div id="page_title" className="col-2">
-      <Link to={"/"} style={{ textAlign: "center" }}> 
-            <img src="logo.png" alt="logo" style={{ width: "149px", height : "63px" }}/>
+        <Link to={"/"} style={{ textAlign: "center" }}>
+          <img
+            src="logo.png"
+            alt="logo"
+            style={{ width: "149px", height: "63px" }}
+          />
         </Link>
       </div>
       <div className="col-6">
@@ -65,8 +69,10 @@ function AddItem() {
           }}
         >
           <Link to={"/list"} style={{ textAlign: "center" }}>
-            <span style={{ fontSize: "24px", fontWeight: "700", color:"#000" }}>
-            <i className="fas fa-arrow-left"></i> Return to List Page
+            <span
+              style={{ fontSize: "24px", fontWeight: "700", color: "#000" }}
+            >
+              <i className="fas fa-arrow-left"></i> Return to List Page
             </span>
           </Link>
         </div>
@@ -130,8 +136,15 @@ function AddItem() {
               required
             />
           </div>
-          <div className="col-auto" style={{ textAlign: "end"}}>
+          <div className="col-auto" style={{ textAlign: "end" }}>
             <button
+              style={{
+                backgroundColor: "#204080",
+                borderColor: "transparent",
+                padding: "10px 40px",
+                fontSize: "18px",
+                fontWeight: "700",
+              }}
               type="submit"
               className="btn btn-primary mb-3"
               disabled={

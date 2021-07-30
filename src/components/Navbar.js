@@ -25,6 +25,9 @@ class NavBar extends Component {
                 style={{
                   backgroundColor: "#204080",
                   borderColor: "transparent",
+                  padding: "10px 40px",
+                  fontSize: "18px",
+                  fontWeight: "700",
                 }}
               >
                 <span
