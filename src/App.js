@@ -1,25 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Route, Switch } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import List from "./components/List";
+import Home from "./components/Home";
+import AddItem from "./components/AddItem"
+
+class App extends React.Component {
+
+  state= {inputVal:""}
+
+handleInput = data => {
+  this.setState({
+    inputVal: data
+  });
+}
+  
+
+  render() {
+    console.log(this.state)
+    return (
+      <div >
+        <Switch>
+        <Route
+            exact
+            path="/"
+            render={(props) => (
+              <Home
+                {...props}
+                handleInput={this.handleInput}
+                inputVal={this.state.inputVal}
+                />
+                )}
+                />
+        <Route
+            exact
+            path="/list"
+            render={(props) => (
+              <List
+              {...props}
+              inputVal={this.state.inputVal}
+              handleInput={this.handleInput}
+              />
+            )}
+          />
+        <Route
+            exact
+            path="/add"
+            render={(props) => (
+              <AddItem
+              {...props}
+              />
+            )}
+          />
+          
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
