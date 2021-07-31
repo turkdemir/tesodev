@@ -61,6 +61,8 @@ function Home(props) {
         );
         setfiltered(sortedItems);
         setsorted(!sorted);
+      } else {
+        handleSearch()
       }
     }
   };

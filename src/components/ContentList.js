@@ -8,9 +8,9 @@ export class Content extends Component {
 
     return (
       <div className="container p-3" style={{ width: "700px", margin:"0 auto", }}>
-        <div className="align-self-end" style={{ position: "absolute", right:"5%"}}>
-        <i class="fas fa-exchange-alt rotate" style={{ position: "relative", left:"15px"}}></i>
-        <select className="px-3 custom-select" id="inputGroupSelect01" style={{ width: "100px", border:"none"}} onChange={this.props.sortBy}>
+        <div className="align-self-end" style={{ position: "absolute", right:"15%"}}>
+        <i class="fas fa-exchange-alt rotate" style={{ position: "relative", left:"20px"}}></i>
+        <select className="px-4 custom-select" id="inputGroupSelect01" style={{ width: "180px", border:"none"}} onChange={this.props.sortBy}>
           <option value="0">Order By</option>
           <option value="NameA">Name ascending</option>
           <option value="NameD">Name descending</option>
