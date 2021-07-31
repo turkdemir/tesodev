@@ -78,63 +78,75 @@ function AddItem() {
         </div>
         <form style={{ fontSize: "18px", padding: "20px" }}>
           <div className="mb-3">
-            <label for="input1" className="form-label">
+            <label for="input1" className={`form-label ${!validate.name && "error"}`}>
               Name Surname
             </label>
             <input
               onChange={handleInput}
               type="text"
-              className="form-control"
+              className={`form-control ${!validate.name && "error-input"}`}
               id="input1"
               name="name"
               placeholder="Enter name and surname"
               pattern="[A-Za-z]{4,60}"
               required
-            />
+            />{
+              !validate.name &&
+              <div id="emailHelp" className="form-text" style={{ fontSize: "18px", color: "#FF0000" }}>Enter only letters, min 4 – max 60 character.</div>
+            }
           </div>
           <div className="mb-3">
-            <label for="input2" className="form-label">
+            <label for="input2" className={`form-label ${!validate.country && "error"}`}>
               Country
             </label>
             <input
               onChange={handleInput}
               type="text"
-              className="form-control"
+              className={`form-control ${!validate.country && "error-input"}`}
               id="input2"
               name="country"
               placeholder="Enter a country"
               pattern="[A-Za-z]{2,40}"
               required
-            />
+            />{
+              !validate.country &&
+              <div id="emailHelp" className="form-text" style={{ fontSize: "18px", color: "#FF0000" }}>Enter only letters, min 2 – max 40 character.</div>
+            }
           </div>
           <div className="mb-3">
-            <label for="input" className="form-label">
+            <label for="input" className={`form-label ${!validate.city && "error"}`}>
               City
             </label>
             <input
               onChange={handleInput}
               type="text"
-              className="form-control"
+              className={`form-control ${!validate.city && "error-input"}`}
               id="input3"
               name="city"
               placeholder="Enter a city"
               pattern="[A-Za-z]{2,40}"
               required
-            />
+            />{
+              !validate.city &&
+              <div id="emailHelp" className="form-text" style={{ fontSize: "18px", color: "#FF0000" }}>Enter only letters, min 2 – max 40 character.</div>
+            }
           </div>
           <div className="mb-3">
-            <label for="input4" className="form-label">
+            <label for="input4" className={`form-label ${!validate.email && "error"}`}>
               Email
             </label>
             <input
               onChange={handleInput}
               type="email"
-              className="form-control"
+              className={`form-control ${!validate.email && "error-input"}`}
               id="input4"
               name="email"
               placeholder="Enter an e-mail (abc@xyz.com)"
               required
-            />
+            />{
+              !validate.email &&
+              <div id="emailHelp" className="form-text" style={{ fontSize: "18px", color: "#FF0000" }}>Enter a valid e-mail.</div>
+            }
           </div>
           <div className="col-auto" style={{ textAlign: "end" }}>
             <button
