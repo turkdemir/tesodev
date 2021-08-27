@@ -1,42 +1,45 @@
 import React from "react";
 
-
 const defaultProps = {
-  initialPage: 1
-}
+  initialPage: 1,
+};
 
 class Pagination extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       pager: {},
-      force:false,
+      force: false,
     };
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.props.items);
+    console.log(prevProps.items);
     if (this.props.items !== prevProps.items) {
       this.setPage(this.props.initialPage);
     }
-    
-    if(this.props.sorted !== prevProps.sorted) {
-      console.log("sorted")
+
+    if (this.props.sorted !== prevProps.sorted) {
+      console.log("sorted");
       this.setPage(this.props.initialPage);
-      this.props.setsorted(false)
+      this.props.setsorted(false);
     }
   }
 
   setPage(page) {
     var items = this.props.items;
     var pager = this.state.pager;
-
-    if (page < 1 || page > pager.totalPages) {
+    console.log("setpage calıştı", items);
+    console.log(page, pager);
+    if (page < 1 || (page !== 1 && page > pager.totalPages)) {
       return;
     }
 
     // get new pager object for specified page
     pager = this.getPager(items.length, page, 6, 6);
 
+    console.log(pager);
     // get new page of items from items array
     var pageOfItems = items.slice(pager.startIndex, pager.endIndex + 1);
     // update state
@@ -47,6 +50,7 @@ class Pagination extends React.Component {
   }
 
   getPager(totalItems, currentPage, pageSize) {
+    console.log("getpager calıştı", totalItems, currentPage, pageSize);
     // default to first page
     currentPage = currentPage || 1;
 
@@ -80,7 +84,9 @@ class Pagination extends React.Component {
     var endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
 
     // create an array of pages to ng-repeat in the pager control
-    var pages = [...Array((endPage + 1) - startPage).keys()].map(i => startPage + i);
+    var pages = [...Array(endPage + 1 - startPage).keys()].map(
+      (i) => startPage + i
+    );
 
     // return object with all pager properties required by the view
     return {
@@ -92,14 +98,13 @@ class Pagination extends React.Component {
       endPage: endPage,
       startIndex: startIndex,
       endIndex: endIndex,
-      pages: pages
+      pages: pages,
     };
   }
 
   render() {
-    //console.log(this.props.items)
-
     var pager = this.state.pager;
+    console.log(pager);
     if (!pager.pages || pager.pages.length <= 1) {
       // don't display pager if there is only 1 page
       return null;
@@ -108,65 +113,97 @@ class Pagination extends React.Component {
     return (
       <div className="container d-flex justify-content-evenly align-items-center m-2">
         <div>
-          <span
-          style={{ border: "none" }}
-          className="align-middle">
-          Showing <b>{pager.startIndex + 1}</b>  to  <b>{pager.endIndex + 1}</b>  of <b>{pager.totalItems}</b> results
-            </span>
-          </div>
+          <span style={{ border: "none" }} className="align-middle">
+            Showing <b>{pager.startIndex + 1}</b> to <b>{pager.endIndex + 1}</b>{" "}
+            of <b>{pager.totalItems}</b> results
+          </span>
+        </div>
         <div className="d-flex ">
-        <button
+          <button
             type="button"
-            className={`btn border-secondary btn-sm m-2 ${pager.currentPage === 1 ? 'disabled' : ''}`}
-            onClick={() => this.setPage(pager.currentPage - 1)}>
+            className={`btn border-secondary btn-sm m-2 ${
+              pager.currentPage === 1 ? "disabled" : ""
+            }`}
+            onClick={() => this.setPage(pager.currentPage - 1)}
+          >
             Previous
           </button>
           <button
             type="button"
-            className={`btn border-secondary btn-sm m-2 ${pager.currentPage === 1 ? 'disabled' : ''}`}
+            className={`btn border-secondary btn-sm m-2 ${
+              pager.currentPage === 1 ? "disabled" : ""
+            }`}
             style={{ boxShadow: "none" }}
-            onClick={() => this.setPage(1)}>
+            onClick={() => this.setPage(1)}
+          >
             {"<<"}
           </button>
           <ul className="pagination mb-0">
             <li>
               <button
-              type="button "
-                className={`${pager.currentPage <= 2 || pager.totalPages <= 3 ? 'd-none' : 'btn border-secondary btn-sm m-2'}`}
+                type="button "
+                className={`${
+                  pager.currentPage <= 2 || pager.totalPages <= 3
+                    ? "d-none"
+                    : "btn border-secondary btn-sm m-2"
+                }`}
                 onClick={() => this.setPage(pager.currentPage - 1)}
-              > . . .
-                </button>
+              >
+                {" "}
+                . . .
+              </button>
             </li>
-            {pager.pages.map((page, index) =>
-              <li key={index} className={`btn border-secondary btn-sm m-2 ${pager.currentPage === page ? 'active' : ''}`}>
-                <span onClick={() => this.setPage(page)}>{page}</span>
+            {pager.pages.map((page, index) => (
+              <li
+                key={index}
+                className={`btn border-secondary btn-sm m-2 ${
+                  pager.currentPage === page ? "active" : ""
+                }`}
+                onClick={(e) => {
+                  console.log("onclick calıştı");
+                  this.setPage(page);
+                }}
+              >
+                <span>{page}</span>
               </li>
-            )}
+            ))}
             <li>
               <button
-              type="button "
-                className={`${pager.currentPage >= (pager.totalPages - 1) ? 'd-none' : 'btn border-secondary btn-sm m-2'}`}
+                type="button "
+                className={`${
+                  pager.currentPage >= pager.totalPages - 1
+                    ? "d-none"
+                    : "btn border-secondary btn-sm m-2"
+                }`}
                 onClick={() => this.setPage(pager.currentPage + 1)}
-              > . . .
-                </button>
+              >
+                {" "}
+                . . .
+              </button>
             </li>
           </ul>
           <button
             type="button "
-            className={`btn border-secondary btn-sm m-2 ${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}
+            className={`btn border-secondary btn-sm m-2 ${
+              pager.currentPage === pager.totalPages ? "disabled" : ""
+            }`}
             style={{ boxShadow: "none" }}
-            onClick={() => this.setPage(pager.totalPages)}>
+            onClick={() => this.setPage(pager.totalPages)}
+          >
             {">>"}
           </button>
           <button
             type="button"
-            className={`btn border-secondary btn-sm m-2 ${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}
-            onClick={() => this.setPage(pager.currentPage + 1)}>
+            className={`btn border-secondary btn-sm m-2 ${
+              pager.currentPage === pager.totalPages ? "disabled" : ""
+            }`}
+            onClick={() => this.setPage(pager.currentPage + 1)}
+          >
             Next
           </button>
         </div>
       </div>
-    )
+    );
   }
 }
 

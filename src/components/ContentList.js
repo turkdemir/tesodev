@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 let mockData = require("../mockData.json");
 
-function Content(props) {
-  const [state, setstate] = useState([]);
+function Content({filtered, sortBy}) {
 
-  useEffect(() => {
-    setstate(props.filtered);
-  }, [props.filtered]);
+
 
   return (
     <div className="container p-3" style={{ width: "700px", margin: "0 auto" }}>
@@ -23,7 +20,7 @@ function Content(props) {
           className="px-4 custom-select"
           id="inputGroupSelect01"
           style={{ width: "180px", border: "none" }}
-          onChange={props.sortBy}
+          onChange={sortBy}
         >
           <option value="0">Order By</option>
           <option value="NameA">Name ascending</option>
@@ -49,9 +46,9 @@ function Content(props) {
           </tr>
         </thead>
         <tbody>
-          {state &&
-            state.length > 0 &&
-            state.map((element, index) => {
+          {filtered &&
+            filtered.length > 0 &&
+            filtered.map((element, index) => {
               return (
                 <tr key={index}>
                   {element.map((item, index) => (

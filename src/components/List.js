@@ -21,7 +21,7 @@ function Home(props) {
     const filteredItems = mockData.data.filter((item) =>
       item.join(",").toLowerCase().includes(inputVal.toLowerCase())
     );
-    console.log(filteredItems)
+    //console.log(filteredItems)
     setfiltered(filteredItems);
   };
 
@@ -71,8 +71,8 @@ function Home(props) {
     setpageOfItems(pageOfItems);
   };
   const arr = ["helll", "04/02/1979"];
-  console.log(arr[1].split("/")[2]);
-  console.log(inputVal, sorted, pageOfItems, filtered);
+  //console.log(arr[1].split("/")[2]);
+  //console.log(inputVal, sorted, pageOfItems, filtered);
 
   return (
     <main className="container p-0 rounded" style={{ backgroundColor: "#FFF" }}>
