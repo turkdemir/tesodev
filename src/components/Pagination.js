@@ -14,14 +14,13 @@ class Pagination extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.items);
-    console.log(prevProps.items);
+    // console.log(this.props.items);
+    // console.log(prevProps.items);
     if (this.props.items !== prevProps.items) {
       this.setPage(this.props.initialPage);
     }
 
     if (this.props.sorted !== prevProps.sorted) {
-      console.log("sorted");
       this.setPage(this.props.initialPage);
       this.props.setsorted(false);
     }
@@ -30,8 +29,7 @@ class Pagination extends React.Component {
   setPage(page) {
     var items = this.props.items;
     var pager = this.state.pager;
-    console.log("setpage calıştı", items);
-    console.log(page, pager);
+   // console.log("setpage calıştı", items);
     if (page < 1 || (page !== 1 && page > pager.totalPages)) {
       return;
     }
@@ -39,7 +37,6 @@ class Pagination extends React.Component {
     // get new pager object for specified page
     pager = this.getPager(items.length, page, 6, 6);
 
-    console.log(pager);
     // get new page of items from items array
     var pageOfItems = items.slice(pager.startIndex, pager.endIndex + 1);
     // update state
@@ -50,7 +47,7 @@ class Pagination extends React.Component {
   }
 
   getPager(totalItems, currentPage, pageSize) {
-    console.log("getpager calıştı", totalItems, currentPage, pageSize);
+    //console.log("getpager calıştı", totalItems, currentPage, pageSize);
     // default to first page
     currentPage = currentPage || 1;
 
@@ -104,7 +101,6 @@ class Pagination extends React.Component {
 
   render() {
     var pager = this.state.pager;
-    console.log(pager);
     if (!pager.pages || pager.pages.length <= 1) {
       // don't display pager if there is only 1 page
       return null;
@@ -159,10 +155,7 @@ class Pagination extends React.Component {
                 className={`btn border-secondary btn-sm m-2 ${
                   pager.currentPage === page ? "active" : ""
                 }`}
-                onClick={(e) => {
-                  console.log("onclick calıştı");
-                  this.setPage(page);
-                }}
+                onClick={() => this.setPage(page)}
               >
                 <span>{page}</span>
               </li>

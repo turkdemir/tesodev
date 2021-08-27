@@ -40,7 +40,7 @@ function AddItem() {
     }
   };
 
-  console.log(state, validate);
+  //console.log(state, validate);
 
   return (
     <div

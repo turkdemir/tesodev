@@ -21,7 +21,7 @@ function Home(props) {
     setfiltered(filteredItems);
   };
 
-  console.log(inputVal, filtered);
+  //console.log(inputVal, filtered);
 
   // let noResultsMessage = (this.state.filteredItems.map((item, index) => {
   //     return item.id === "" ? <div key={index}>No results found!</div> : ''
